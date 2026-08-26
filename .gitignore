@@ -6,5 +6,3 @@ __pycache__/
 /bop_toolkit/
 /datasets/*
 !/datasets/predefined_poses
-/groundingdino
-/demo
