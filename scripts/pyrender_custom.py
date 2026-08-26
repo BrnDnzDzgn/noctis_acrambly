@@ -67,7 +67,7 @@ def render_pyrender(cad_path: str,
     mesh.apply_scale(scale)
 
     if overwrite_color is None:
-        mesh = pyrender.Mesh.from_trimesh(mesh, smooth=True)
+        mesh = pyrender.Mesh.from_trimesh(mesh, smooth=False)
     else:
         mesh.visual.face_colors = np.repeat(overwrite_color[None, :], len(mesh.faces), axis=0)
         mesh.visual.vertex_colors = np.repeat(overwrite_color[None, :], len(mesh.vertices), axis=0)

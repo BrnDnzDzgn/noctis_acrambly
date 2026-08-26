@@ -133,7 +133,7 @@ class BaseBOP(Dataset):
                     for json_name in json_names:
                         data = video_metadata[json_name]
                         if data:
-                            metadata[json_name].append(data[str(frame_id)])
+                            metadata[json_name].append(data[str(frame_id).zfill(6)])
                         else:
                             metadata[json_name].append(None)
 

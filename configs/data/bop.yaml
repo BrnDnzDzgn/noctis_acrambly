@@ -1,10 +1,10 @@
-root_dir: ${machine.root_dir}/datasets/
+root_dir: ${machine.root_dir}/
 source_url: https://huggingface.co/datasets/bop-benchmark/datasets/resolve/main/
 unzip_mode: unzip
 
 reference_dataloader:
   _target_: src.dataloader.bop.BOPTemplate
-  template_dir: ${machine.root_dir}/datasets/
+  template_dir: ${machine.root_dir}/
   obj_ids:
   predefined_poses_dir: ${machine.root_dir}/predefined_poses/ico
   level_templates: 0
@@ -20,7 +20,7 @@ reference_dataloader:
 
 query_dataloader:
   _target_: src.dataloader.bop.BaseBOPTest
-  root_dir: ${machine.root_dir}/datasets/
+  root_dir: ${machine.root_dir}/
   split:
   load_depth: False
   reset_metadata: True
