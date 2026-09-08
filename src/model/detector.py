@@ -361,6 +361,7 @@ class NOCTIS(pl.LightningModule):
         detections.add_attribute("score_distribution", pred_score_distribution)
         detections.add_attribute("object_ids", pred_object_indices)
         detections.apply_nms_per_object_id(self.post_processing_config.nms_threshold)
+        detections.keep_best_per_object_id()
         matching_stage_end_time = time.time()
 
         runtime = (proposal_stage_end_time - proposal_stage_start_time

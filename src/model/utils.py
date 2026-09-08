@@ -101,6 +101,33 @@ class Detections:
         logging.info("Removing {} to small detections.".format(len(keep_indices) - keep_indices.sum()))
         self.filter(keep_indices)
 
+    def keep_best_per_object_id(self) -> None:
+        """
+        Keeps only the highest-scoring detection for each object ID.
+        """
+        keep_indices = []
+
+        for object_id in torch.unique(self.object_ids):
+            object_indices = torch.where(self.object_ids == object_id)[0]
+
+            best_idx = object_indices[
+                torch.argmax(self.scores[object_indices])
+            ]
+
+            keep_indices.append(best_idx)
+
+        if len(keep_indices):
+            keep_indices = torch.stack(keep_indices)
+
+            logging.info(
+                "Keeping best detection for each object ID. "
+                "Removing {} detections.".format(
+                    len(self.object_ids) - len(keep_indices)
+                )
+            )
+
+            self.filter(keep_indices)
+
     def apply_nms_per_object_id(self, nms_threshold: float = 0.5) -> None:
         """
         Performs non-maximum suppression (NMS) on the bounding boxes per object according to their score.
